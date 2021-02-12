@@ -6,16 +6,93 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".MainActivity">
-
-   <com.avijit.signaturemaker.Views.SignatureView xmlns:tools="http://schemas.android.com/tools"
-       app:layout_constraintHeight_percent=".8"
-       android:layout_margin="20dp"
-       android:background="@drawable/white_bg_round"
-       android:elevation="10dp"
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/layout1"
        android:layout_width="match_parent"
        android:layout_height="0dp"
-       >
+       app:layout_constraintHeight_percent=".2"
+       app:layout_constraintTop_toTopOf="parent">
 
-   </com.avijit.signaturemaker.Views.SignatureView>
+      <ImageView
+          android:elevation="2dp"
+          android:id="@+id/ic_save"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_margin="15dp"
+          android:src="@mipmap/ic_save"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <ImageView
+          android:id="@+id/ic_color"
+          android:elevation="2dp"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_margin="15dp"
+          android:src="@mipmap/ic_color_picker_round"
+          app:layout_constraintEnd_toStartOf="@id/ic_save"
+          app:layout_constraintHeight_percent=".5"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintWidth_percent=".2" />
+
+      <ImageView
+          android:elevation="2dp"
+          android:id="@+id/ic_erase"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_margin="15dp"
+          android:src="@mipmap/ic_eraser"
+          app:layout_constraintEnd_toStartOf="@id/ic_color"
+          app:layout_constraintHeight_percent=".5"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintWidth_percent=".2" />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="2dp"
+          android:text="color"
+          android:textColor="#000000"
+          app:layout_constraintEnd_toEndOf="@id/ic_color"
+          app:layout_constraintStart_toStartOf="@id/ic_color"
+          app:layout_constraintTop_toBottomOf="@id/ic_color" />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="2dp"
+          android:text="save"
+          android:textColor="#000000"
+          app:layout_constraintEnd_toEndOf="@id/ic_save"
+          app:layout_constraintStart_toStartOf="@id/ic_save"
+          app:layout_constraintTop_toBottomOf="@id/ic_save" />
+      <TextView
+          android:layout_width="wrap_content"
+          android:elevation="2dp"
+          android:layout_height="wrap_content"
+          android:text="erase all"
+          android:textColor="#000000"
+          app:layout_constraintEnd_toEndOf="@id/ic_erase"
+          app:layout_constraintStart_toStartOf="@id/ic_erase"
+          app:layout_constraintTop_toBottomOf="@id/ic_erase" />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="0dp"
+       app:layout_constraintTop_toBottomOf="@id/layout1"
+       android:layout_height="0dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       >
+      <com.avijit.signaturemaker.Views.SignatureView xmlns:tools="http://schemas.android.com/tools"
+          android:background="@drawable/white_bg_round"
+          android:elevation="10dp"
+          android:layout_margin="30dp"
+          app:layout_constraintTop_toTopOf="parent"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          />
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
