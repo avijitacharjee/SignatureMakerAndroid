@@ -83,7 +83,8 @@
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintBottom_toBottomOf="parent"
        >
-      <com.avijit.signaturemaker.Views.SignatureView xmlns:tools="http://schemas.android.com/tools"
+      <com.avijit.signaturemaker.Views.SignatureView
+          android:id="@+id/signature_view"
           android:background="@drawable/white_bg_round"
           android:elevation="10dp"
           android:layout_margin="30dp"

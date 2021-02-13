@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SignatureMaker</string>
+    <string name="alert_dialog_message">Are you sure you want to exit?</string>
 </resources>

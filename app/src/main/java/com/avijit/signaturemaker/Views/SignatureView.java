@@ -8,15 +8,23 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.ColorInt;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Avijit Acharjee on 2/12/2021 at 6:36 PM.
  * Email: avijitach@gmail.com.
  */
-class SignatureView extends View {
+public class SignatureView extends View {
     private static float TOUCH_TOLERANCE = 4;
     private Bitmap bitmap;
     private Path path;
@@ -44,6 +52,13 @@ class SignatureView extends View {
         path = new Path();
         bitmapPaint = new Paint(Paint.DITHER_FLAG);
         initializePen();
+    }
+    public void clear() {
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        invalidate();
+    }
+    public void setPenColor(@ColorInt int color) {
+        paint.setColor(color);
     }
     private void initializePen(){
         paint = new Paint();
@@ -136,5 +151,50 @@ class SignatureView extends View {
         }
         canvas = new Canvas(bitmap);
         canvas.drawColor(Color.TRANSPARENT);
+    }
+    public void saveToDevice() {
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+                File myDir = new File(root + "/Signature");
+                if (!myDir.exists()) {
+                    myDir.mkdirs();
+                }
+                // Create imageDir
+                File mypath = new File(myDir, "Signature_" + System.currentTimeMillis() + ".jpg");
+
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(mypath);
+                    // Use the compress method on the BitMap object to write image to the OutputStream
+                    FileOutputStream finalFos = fos;
+                    takeScreenShot(SignatureView.this).compress(Bitmap.CompressFormat.PNG, 100, finalFos);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        fos.flush();
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+    public Bitmap takeScreenShot(View view) {
+        view.setDrawingCacheEnabled(true);
+        view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
+        view.buildDrawingCache();
+
+        if (view.getDrawingCache() == null) return null;
+        Bitmap snapshot = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+        view.destroyDrawingCache();
+
+        return snapshot;
     }
 }
