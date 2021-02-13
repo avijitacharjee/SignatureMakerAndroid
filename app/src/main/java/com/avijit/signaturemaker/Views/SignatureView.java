@@ -176,6 +176,7 @@ public class SignatureView extends View {
                     e.printStackTrace();
                 } finally {
                     try {
+                        //Toast.makeText(SignatureView.this.getContext(), "Saved to your device", Toast.LENGTH_SHORT).show();
                         fos.flush();
                         fos.close();
                     } catch (IOException e) {

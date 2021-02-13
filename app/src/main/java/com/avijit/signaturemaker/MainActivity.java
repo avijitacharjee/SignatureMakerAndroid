@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 // You can use the API that requires the permission.
                 //performAction(...);
                 binding.signatureView.saveToDevice();
+                Toast.makeText(CONTEXT, "Saved to your device", Toast.LENGTH_SHORT).show();
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     // In an educational UI, explain to the user why your app requires this
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     // Permission is granted. Continue the action or workflow
                     // in your app.
                 } else {
-                    Toast.makeText(CONTEXT, "Allow permissions to save to sd card", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CONTEXT, "Allow permissions to save to device", Toast.LENGTH_SHORT).show();
                 }
                 return;
         }
